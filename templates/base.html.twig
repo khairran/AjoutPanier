@@ -6,6 +6,13 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+
+    {% for type, messages in app.flashes %}
+    {# pour les msg flash #}
+        {% for message in messages %}
+            <p class="alert alert-success">{{message}}</p>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

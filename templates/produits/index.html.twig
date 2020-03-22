@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProduitsController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller }}! ✅</h1>
+    {% if produits is not empty %}
+  <p>a {{produits|length}}<p>
+  <p>{{ 'produit.produit'| trans ({'nb':produits|length }) }}</p>
+   <table border="1" class="table">
+        <thead>
+            <tr >
+                <th>{{'produits.nom' | trans }}</th>
+                <th>{{'produits.quantite' | trans }}</th>
+                <th>{{'produits.prix' | trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mon_produit in produits %}
+            <tr>
+                <td>
+                <a href="{{ path('mon_produit', {'id': mon_produit.id}) }}">
+                {{ mon_produit.nom}}</td>
+                <td>{{mon_produit.quantite}}</td>
+                <td>{{mon_produit.prix}}</td>
+                <td>
+                <a href="{{ path('produit_categorie', {'id': mon_produit.id}) }}">
+                {{'produit.' | trans }}
+                </td>
+                
+            </tr>
+            {% endfor %}
+       </tbody>
+
+
+        
+    </table>
+
+    {% else %}
+    <p>{{'produit.nothing' | trans }}</p>
+{% endif %}
+            
+
+    Affichage de nos produits : 
+    <ul>
+        
+        <li>retour à<code><a href="{{ '/' }}">  l'accueil</a></code></li>
+        <li>Votre <code><a href="{{ '/panier' }}">panier</a></code></li>
+         {{ dump(produits) }}
+    
+
+    <h1>Ajouter un produit à la liste des produits<h1>
+<h2>>{{'produit.ajout' | trans }}</h2>
+{{ form(form) }}
+   </ul>
+</div>
+{% endblock %}
