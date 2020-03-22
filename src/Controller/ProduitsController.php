@@ -48,7 +48,7 @@ class ProduitsController extends AbstractController
                 } catch(FileException $e) {
                     $this->addFlash("sanger", "Le fichier n'a pas pu etre uploade",
                 $translator->trans('file.error'));
-                    return $this->redirectToRoute('/produit');
+                    return $this->redirectToRoute('produit');
                 }
 
                 $produit->setImage($nomFichier);
@@ -74,7 +74,7 @@ class ProduitsController extends AbstractController
     }
     
                /**
-         * @Route("produit/{id}", name="mon_produit")
+         * @Route("produit/{id}", name="produit_panier")
          */
     public function produits(Request $request, Produits $produits){
         if($produits != null){
@@ -91,9 +91,8 @@ class ProduitsController extends AbstractController
 
             }
 
-            return $this->render('produits/produit.html.twig', [ // on renvoit à la vue
+            return $this->render('panier/panier.html.twig', [ // on renvoit à la vue
                 'produit' => $produits,
-                'form' => $form->createView(),
                 'form_produit_new' => $form->createView()          
 
                 ]);
@@ -102,7 +101,7 @@ class ProduitsController extends AbstractController
             ///produit nexiste pas 
             $this->addFlash("danger", "Produit introuvable");
     
-            return $this->redirectToRoute('/produit');
+            return $this->redirectToRoute('produit');
             }
     }
     /**
@@ -118,6 +117,6 @@ class ProduitsController extends AbstractController
         } else {
             $this->addFlash("error", "Produit introuvable");
         }
-        return $this->redirectToRoute('/produit');
+        return $this->redirectToRoute('produit');
     }
 }

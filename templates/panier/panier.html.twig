@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{produit_panier.nom}} {% endblock %}
+
+
+{% block body%}
+    <h1>{{ produit_panier.nom }}</h1>
+    <p>{{ produit_panier.prix }}</p>
+    {% if produit_panier.image is not null %}
+    <img src="{{ asset('uploads/brochures/' ~ produit_panier.image) }}"> {#chemin depuis le dossier public#}
+    {% endif %}
+
+
+
+
+{% endblock %}
